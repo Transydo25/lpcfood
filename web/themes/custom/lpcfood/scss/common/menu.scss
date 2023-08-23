@@ -1,0 +1,32 @@
+@import "color";
+// menu header
+.menuheader {
+
+  ul.navbar-nav {
+    flex-direction: row;
+    justify-content: space-between;
+    li {
+      a {
+        font-weight: 500;
+        font-size: 18px;
+      }
+    }
+    li.dropdown {
+      ul {
+        a {
+          font-size: 14px !important;
+        }
+      }
+    }
+  }
+}
+.modal-body-mobile {
+  .menu--menu-header {
+    a.nav-link, a.dropdown-item {
+      font-weight: bold;
+      font-size: 20px;
+      color: black !important;
+      background-color: white !important;
+    }
+  }
+}

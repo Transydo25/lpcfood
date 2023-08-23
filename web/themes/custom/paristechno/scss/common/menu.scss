@@ -1,0 +1,18 @@
+@import "color";
+
+.menu--account {
+  color: $third !important;
+
+  span.nav-item {
+    display: flex;
+  }
+
+  svg {
+    font-size: 2rem;
+  }
+
+  .dropdown-toggle:after {
+    display: none;
+  }
+}
+

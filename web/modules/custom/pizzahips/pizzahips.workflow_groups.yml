@@ -1,0 +1,3 @@
+order_prepared_fulfillment_validation:
+  label: 'Order item'
+  entity_type: commerce_order_item

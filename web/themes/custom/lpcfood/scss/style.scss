@@ -1,0 +1,65 @@
+// Sub theme styling.
+@import 'variables_drupal';
+
+// Bootstrap overriden variables.
+// @see https://getbootstrap.com/docs/5.2/customize/sass/#variable-defaults.
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap');
+@import 'variables_bootstrap';
+@import "common/color";
+@import "common/menu";
+@import "layout/header";
+@import "layout/homepage";
+@import "layout/product";
+@import "layout/layout";
+@import "layout/responsive";
+@import "layout/partner.scss";
+
+body {
+    font-family: "Roboto";
+}
+.commerce-product__contents {
+  .field--name-variations {
+    button {
+      font-size: 14px;
+    }
+  }
+  .field--name-body {
+    .field--label {
+      font-weight: bold;
+    }
+  }
+}
+.js-form-item-purchased-entity-attributes-attribute-weight {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  #edit-purchased-entity-attributes-attribute-weight{
+    width:6rem;
+  }
+  label {
+    margin-right: 20px;
+    font-weight: bold;
+    &::after {
+      content: ":";
+    }
+  }
+}
+
+//màu chữ
+.text-food {
+  color: $second;
+}
+
+.text-food-50 {
+  color: $second;
+  opacity: 0.5;
+}
+
+.bg-food {
+  background-color: $second;
+}
+
+.bg-food-50 {
+  background-color: $second;
+  opacity: 0.5;
+}

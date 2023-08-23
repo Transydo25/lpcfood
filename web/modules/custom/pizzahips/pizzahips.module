@@ -1,0 +1,444 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
+use Drupal\user\Entity\User;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\views\ViewExecutable;
+use Drupal\user\Entity\Role;
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ *
+ * We are altering the editor_image_dialog form to allow svg images.
+ *
+ * @see Drupal\editor\Form\EditorImageDialog
+ */
+function pizzahips_form_editor_image_dialog_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (isset($form['fid']['#upload_validators']['file_validate_extensions'][0])) {
+    $form['fid']['#upload_validators']['file_validate_extensions'][0] .= ' svg';
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function pizzahips_theme($existing, $type, $theme, $path) {
+  return [
+    'reservation' => [
+      'variables' => [
+        'order_id' => NULL,
+        'storeSelected' => NULL,
+        'stores' => [],
+        'datePickup' => [],
+        'timePickup' => [],
+        'address' => NULL,
+        'date' => NULL,
+        'time' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function pizzahips_form_contact_message_devenir_partenaire_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form["#attributes"]["class"][] = 'shadow bg-white rounded p-3 mt-5 mb-5 container';
+  $form["field_telephone"]["widget"][0]["value"]["#pattern"] = '^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$';
+  array_unshift($form["actions"]["submit"]["#submit"], 'addSubjectAlterSubmit');
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function pizzahips_form_contact_message_add_partner_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form["#attributes"]["class"][] = 'shadow bg-white rounded p-3 mt-5 mb-5 container';
+  $form["field_telephone"]["widget"][0]["value"]["#pattern"] = '^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$';
+  array_unshift($form["actions"]["submit"]["#submit"], 'addSubjectAlterSubmit');
+  $form["name"]["#attributes"]["placeholder"] = t("Full name");
+  $form["name"]["#title"] = t("Franchise registration");
+  $form["mail"]["#attributes"]["placeholder"] = t("Email");
+  $form["field_telephone"]["widget"]["#title"] = t("Your phone number");
+  $form["field_telephone"]["widget"][0]["value"]["#placeholder"] = t("Phone number...");
+  $form["field_desire"]["widget"]["#title"] = t("Desires and needs when doing business");
+  $form["field_desire"]["widget"][0]["value"]["#placeholder"] = t("Desires and needs when doing business");
+  $form["field_estimated_capital_size"]["widget"]["#title"] = t("Planned capital size for business cooperation");
+  $form["field_estimated_capital_size"]["widget"][0]["value"]["#placeholder"] = t("Planned capital size for business cooperation");
+  $form["field_date_time"]["widget"][0]["#title"] = t("Estimated time of implementation");
+  $form["field_address"]["widget"][0]["#title"] = t("Regional address, business cooperation area");
+  $form["actions"]["submit"]["#value"] = t("Send");
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function pizzahips_form_contact_message_devenir_franchise_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form["field_telephone"]["widget"][0]["value"]["#pattern"] = '^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$';
+  $form["#attributes"]["class"][] = 'shadow bg-white rounded p-3 mt-5 mb-5 container';
+  array_unshift($form["actions"]["submit"]["#submit"], 'addSubjectAlterSubmit');
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function pizzahips_form_contact_message_feedback_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form["#attributes"]["class"][] = 'shadow bg-white rounded p-3 mt-5 mb-5 container';
+  $form["field_telephone"]["widget"][0]["value"]["#pattern"] = '^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$';
+  array_unshift($form["actions"]["submit"]["#submit"], 'addSubjectAlterSubmit');
+  $form["name"]["#title"] = t("Contact");
+  $form["name"]["#attributes"]["placeholder"] = t("Full name");
+  $form["mail"]["#attributes"]["placeholder"] = t("Email");
+  $form["field_telephone"]["widget"]["#title"] = t("Your phone number");
+  $form["field_telephone"]["widget"][0]["value"]["#placeholder"] = t("Phone number...");
+  $form["message"]["widget"][0]["value"]["#placeholder"] = t("The message you want to send to us...");
+  $form["actions"]["submit"]["#value"] = t("Send");
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function pizzahips_form_contact_message_recrutement_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['#cache']['max-age'] = 0;
+  $form["#attributes"]["class"][] = 'shadow bg-white rounded p-3 mt-5 mb-5 container';
+  $form["field_telephone"]["widget"][0]["value"]["#pattern"] = '^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$';
+  $idNode = \Drupal::request()->query->get('job');
+
+  if (!empty($idNode)) {
+    $node_details = Node::load($idNode);
+    $form["field_job"]["widget"][0]["value"]["#default_value"] = $node_details->getTitle();
+  }
+  array_unshift($form["actions"]["submit"]["#submit"], 'addSubjectAlterSubmit');
+  $form["name"]["#attributes"]["placeholder"] = t("Full name");
+  $form["name"]["#title"] = t("Application for employment");
+  $form["mail"]["#attributes"]["placeholder"] = t("Email");
+  $form["field_telephone"]["widget"]["#title"] = t("Your phone number");
+  $form["field_telephone"]["widget"][0]["value"]["#placeholder"] = t("Phone number...");
+  $form["message"]["widget"][0]["value"]["#placeholder"] = t("What message do you want to send to us?");
+  $form["field_cv"]["widget"][0]["#title"] = t("Upload your CV");
+  $form["field_base"]["widget"]["#title"] = t("Base");
+  $form["actions"]["submit"]["#value"] = t("Send");
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function pizzahips_form_simplenews_subscriptions_block_simp_news_form_alter(&$form, FormStateInterface $form_state) {
+  $form["#prefix"] = '<div class="simp_news_form">';
+  $form["#suffix"] = '</div>';
+  $form["subscriptions"]["#access"] = FALSE;
+  $form["footer"]["#access"] = FALSE;
+  $form["#attributes"]["class"][] = 'row';
+  $form["mail"]["#attributes"]["class"][] = 'col-8';
+  $form["mail"]["widget"][0]["value"]["#placeholder"] = t("E-mail");
+  $form["mail"]["widget"][0]["value"]["#title_display"] = "invisible";
+  $form["mail"]["widget"][0]["value"]['#pattern'] = "(?![_.-])((?![_.-][_.-])[a-zA-Z\d_.-]){0,63}[a-zA-Z\d]@((?!-)((?!--)[a-zA-Z\d-]){0,63}[a-zA-Z\d]\.){1,2}([a-zA-Z]{2,14}\.)?[a-zA-Z]{2,14}";
+  $form["actions"]["#attributes"]["class"][] = 'col-4 text-end';
+  $form["actions"]["#weight"] = $form["mail"]["#weight"] + 1;
+  $form["message"]["#weight"] = $form["mail"]["#weight"] + 2;
+}
+
+/**
+ * Implements add Subject contact form..
+ */
+function addSubjectAlterSubmit(&$form, FormStateInterface $form_state) {
+  $form_state->setValue('subject', [str_replace('_', ' ', $form["#form_id"])]);
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function pizzahips_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['#submit'][] = '_login_page_redirect_user_login_form_submit';
+}
+
+/**
+ * Custom submit handler for login form.
+ */
+function _login_page_redirect_user_login_form_submit($form, FormStateInterface $form_state) {
+  $user = User::load(\Drupal::currentUser()->id());
+  if(!empty($user->field_store->target_id)) {
+    $targetId = $user->field_store->target_id;
+    $store = Node::load($targetId);
+    $storeId = $store->uuid();
+  }
+  if(!empty($storeId)) {
+    $url = Url::fromRoute('view.orders.orders', [
+      'arg_0' => $storeId,
+    ]);
+    $form_state->setRedirectUrl($url);
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function pizzahips_form_commerce_product_default_edit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form["actions"]["submit"]["#submit"][] = 'addProductRelatedAfterSubmit';
+}
+
+/**
+ * {@inheritDoc}
+ */
+function addProductRelatedAfterSubmit(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $isAdded = FALSE;
+  $buildInfo = $form_state->getBuildInfo()["callback_object"];
+  $product = $buildInfo->getEntity();
+  $productId = $product->id();
+  if (!empty($form_state->getValue('field_product_related'))) {
+    foreach ($form_state->getValue('field_product_related') as $productRelated) {
+      if (!$productRelated['target_id']) {
+        break;
+      }
+      $product = Drupal\commerce_product\Entity\Product::load($productRelated['target_id']);
+      $product_relateds = $product->get('field_product_related')->getValue();
+      $isAdded = TRUE;
+      foreach ($product_relateds as $related) {
+        if ($related['target_id'] == $productId) {
+          $isAdded = FALSE;
+        }
+      }
+    }
+    if ($isAdded) {
+      $product_relateds[] = ['target_id' => $productId];
+      $product->set("field_product_related", $product_relateds);
+      $product->save();
+    }
+  }
+}
+
+/**
+ * Disable user changes name key email notification.
+ *
+ * Implements hook_form_FORM_ID_alter().
+ */
+function pizzahips_form_taxonomy_term_email_notification_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $user_roles = \Drupal::currentUser()->getRoles();
+  if(!empty($form["tid"]["#value"]) && !in_array('administrator', $user_roles)){
+    $form["name"]["widget"][0]["value"]["#attributes"]["disabled"] = 'disabled';
+  }
+  $form["description"]["widget"][0]["#description"] = 'Variables available {{ ' .
+    implode(' }}, {{ ', [
+      'customer_name',
+      'customer_phone',
+      'customer_email',
+      'order_id',
+      'order_number',
+      'store_location',
+      'store_phone',
+      'store_id',
+      'order_summary',
+      'order_date',
+      'order_day',
+      'order_time',
+      'order_total',
+      'order_subtotal',
+    ]) . ' }}';
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function pizzahips_form_commerce_checkout_flow_multistep_default_alter(&$form, FormStateInterface $form_state, $form_id) {
+//  $form["billing_information"]["profile"]["field_email"]["widget"]["#title"] = t('Your email');
+//  $form["billing_information"]["profile"]["field_phone"]["widget"]["#title"] = t('Your phone number');
+  $form["checkout_pane_reservation"]["field_address_to"]["#attributes"]["class"][] = 'js-hide';
+  if(!empty($form["#step_id"]) && $form["#step_id"] == 'review') {
+    if(isset($form["billing_information"]["profile"]["select_address"])) {
+      if($form["billing_information"]["profile"]["select_address"]["#default_value"] == "_new") {
+        $user_current = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+        if(!empty($user_current)) {
+          $form["billing_information"]["profile"]["address"]["widget"][0]["address"]["#default_value"]["family_name"] = $user_current->getDisplayName();
+          $form["billing_information"]["profile"]["field_email"]["widget"][0]["value"]["#default_value"] = $user_current->getEmail();
+          $form["billing_information"]["profile"]["field_telephone"]["widget"][0]["value"]["#default_value"] = $user_current->field_telephone->value;
+        }
+      }
+    }
+  }
+  if(!empty($form["#step_id"]) && $form["#step_id"] == 'complete') {
+    $order = \Drupal::routeMatch()->getParameter('commerce_order');
+    $context = \Drupal::service('order.context')->getOrder($order->id());
+    send_email_complete_order($context['customer_email'], $context);
+    send_email_complete_order_admin('haoduc1530@gmail.com', $context);
+//    send_sms_complete_order($context['customer_phone'], $context);
+//    send_notification_admin_complete_order($context['store_id'], $context);
+  }
+}
+
+/**
+ * Send email when complete order.
+ *
+ * {@inheritDoc}
+ */
+function send_email_complete_order($to = '', $context = []) {
+  if (!empty($to)) {
+    $term_name = 'send mail order success';
+    $service = \Drupal::service('order.context');
+    $context['key'] = 'order-customer-mail';
+    $message = $service->getTemplateTerm($term_name, $context);
+    if (!empty($message)) {
+      $mailManager = \Drupal::service('plugin.manager.mail');
+      $mailManager->getInstance(['module' => 'pizzahips', 'key' => $context['key']])
+        ->mail($message);
+    }
+  }
+}
+
+function send_email_complete_order_admin($to = '', $context = []) {
+  if (!empty($to)) {
+    $term_name = 'send order success to admin';
+    $service = \Drupal::service('order.context');
+    $context['key'] = 'order-customer-mail';
+    $message = $service->getTemplateTerm($term_name, $context);
+    $message["to"] = 'Admin<'.$to.'>';
+    if (!empty($message)) {
+      $mailManager = \Drupal::service('plugin.manager.mail');
+      $mailManager->getInstance(['module' => 'pizzahips', 'key' => $context['key']])
+        ->mail($message);
+    }
+  }
+}
+
+/**
+ * Send sms when complete order.
+ *
+ * {@inheritDoc}
+ */
+function send_sms_complete_order($phone = '', $context = []) {
+  if (!empty($phone) && \Drupal::moduleHandler()->moduleExists('sms_message')) {
+    $term_name = 'send sms order success';
+    $term = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->loadByProperties(['name' => $term_name]);
+    $term = reset($term);
+
+    if (!empty($term)) {
+      $uid = 1;
+      $renderer = [
+        '#type' => 'inline_template',
+        '#template' => $term->getDescription(),
+        '#context' => $context,
+      ];
+      $message = strip_tags(\Drupal::service('renderer')->render($renderer));
+      $sms = \Drupal::entityTypeManager()->getStorage('sms_message')->create([
+        'type' => 'sms_message',
+        'number' => $phone,
+        'message' => [
+          'value' => $message,
+        ],
+        'uid' => $uid,
+      ]);
+      $sms->save();
+    }
+  }
+}
+
+/**
+ * Send notification when complete order.
+ *
+ * {@inheritDoc}
+ */
+function send_notification_admin_complete_order($store_id=1, $context = []) {
+  $userStorage = \Drupal::entityTypeManager()->getStorage('user');
+
+  $query = $userStorage->getQuery();
+
+  $role_name = 'management_agent';
+
+  $role = Role::load($role_name);
+
+  $and_group = $query->andConditionGroup()
+    ->condition('status', 1)
+    ->condition('field_store', $store_id);
+
+  $or_group = $query->orConditionGroup()
+    ->condition($and_group)
+    ->condition('roles', $role->id());
+
+  $query->condition($or_group);
+
+  $uids = $query->execute();
+
+  if (!empty($uids)) {
+    $date = $context['order_day'] . ' - ' . $context['order_time'];
+    $title = (string) t('Got a new order on %date', ['%date' => $date]);
+    $message = (string) t('Customer %name buys goods', ['%name' => $context['customer_name']]);
+    $url = Url::fromRoute('<front>')->toString();
+    foreach ($uids as $userID) {
+      \Drupal::service('pwa_firebase.send')
+        ->sendMessageToUser($userID, strip_tags($title), strip_tags($message), $url);
+    }
+  }
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function pizzahips_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  if ($view->id() == 'orders' && $view->getDisplay()->display['id'] == 'orders' && !empty( $query->where[1]) && !empty( $query->where[1]["conditions"])) {
+    $datePickup = $query->where[1]["conditions"][0]["field"];
+    $query->where[1]["conditions"][0]["field"] = str_replace('\T%H:%i:%s','', $datePickup);
+    if ($query->where[1]["conditions"][0]["field"] == 'commerce_order.state') {
+      $query->where[1]["conditions"][] = [
+        'field' => "DATE_FORMAT((commerce_order__field_pickup_date.field_pickup_date_value + INTERVAL 7200 SECOND), '%Y-%m-%d') = DATE_FORMAT(CURDATE() , '%Y-%m-%d')",
+        'operator' => 'formula',
+        'value' => [],
+      ];
+    }
+  }
+}
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function pizzahips_views_data_alter(array &$data) {
+  $data['commerce_order']['billing_profile'] = [
+    'title' => t('Billing Profile'),
+    'help' => t('Reference to the billing profile of a commerce order.'),
+    'relationship' => [
+      'group' => 'Order',
+      // Views name of the table being joined to from commerce_order.
+      'base' => 'profile',
+      // Database field name in profile for the join.
+      'base field' => 'profile_id',
+      // Real database field name in commerce_order for the join, to override
+      // 'unique_dummy_name'.
+      'field' => 'billing_profile__target_id',
+      // ID of relationship handler plugin to use.
+      'id' => 'standard',
+      'label' => t('Billing Profile'),
+    ],
+  ];
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function pizzahips_views_pre_render(ViewExecutable $view) {
+  if (!empty($view) && ($view->storage->id() == 'notre_carte') && $view->getDisplay()->display["id"] == 'store_location') {
+    $view->element['#attached']['library'][] = 'pizzahips/map';
+    $url = Url::fromRoute('pizzahips.save_history_search_map');
+    $view->element['#attached']['drupalSettings']['pizzahips']['save_history_search_map'] = $url->toString();
+  }
+  if ($view->storage->id() == "report"){
+    $view->element['#attached']['library'][] = 'pizzahips/total';
+  }
+}
+
+function pizzahips_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if(!empty($form["field_pickup_date_value_wrapper"])) {
+    $form["field_pickup_date_value_wrapper"]['#title_display'] = 'invisible';
+    $form["field_pickup_date_value_wrapper"]["field_pickup_date_value"]["min"]["#title"] = t('Start date');
+    $form["field_pickup_date_value_wrapper"]["field_pickup_date_value"]["min"]["#type"] = 'date';
+    $form["field_pickup_date_value_wrapper"]["field_pickup_date_value"]["max"]["#title"] = t('End date');
+    $form["field_pickup_date_value_wrapper"]["field_pickup_date_value"]["max"]["#type"] = 'date';
+  }
+  if (!empty($form["created_wrapper"])) {
+    $form["created_wrapper"]['#title_display'] = 'invisible';
+    $form["created_wrapper"]["created"]["min"]["#title"] = t('Start date');
+    $form["created_wrapper"]["created"]["min"]["#type"] = 'date';
+    $form["created_wrapper"]["created"]["max"]["#title"] = t('End date');
+    $form["created_wrapper"]["created"]["max"]["#type"] = 'date';
+  }
+}

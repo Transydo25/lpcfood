@@ -1,0 +1,22 @@
+services:
+  pizzahips.twig.convertPrice:
+    class: Drupal\pizzahips\TwigExtension\ConvertPrice
+    tags:
+      - { name: twig.extension }
+  pizzahips.twig.OrderStateByDate:
+    class: Drupal\pizzahips\TwigExtension\OrderStateByDate
+    tags:
+      - { name: twig.extension }
+  cart_normalizer.order_items:
+    class: Drupal\pizzahips\Normalizer\CartNormalizer
+    tags:
+      - { name: normalizer, priority: 2 }
+
+  order.context:
+    class: Drupal\pizzahips\OrderContext
+
+  event_subscriber_order.finish:
+    class: Drupal\pizzahips\EventSubscriber\OrderFinishSubscriber
+    arguments: [ '@language_manager', '@plugin.manager.mail' ]
+    tags:
+      - { name: 'event_subscriber' }

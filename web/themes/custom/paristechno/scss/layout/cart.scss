@@ -1,0 +1,235 @@
+.cart-offcanvas {
+  margin-top: 80px;
+  width: 100%;
+  padding: 0 !important;
+  height: 80vh;
+  margin-right: 3px;
+  min-height: unset;
+  overflow-y: scroll;
+  max-width: 400px;
+
+  .cart--cart-offcanvas {
+    padding: 1rem;
+
+    .subtitle.d-inline {
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .cart-item-block {
+      img.cart-block--offcanvas-cart-table__image {
+        flex: 1;
+        border: 1px solid lightgray;
+        max-height: 150px;
+        max-width: 80px;
+        object-fit: contain;
+      }
+
+      .cart-block--offcanvas-cart-table__title {
+        flex: 3;
+        margin: 0 1em;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      span.quantity-text {
+        font-size: 0.9em;
+        color: gray;
+        margin-top: 20px;
+        display: block;
+      }
+
+      .quantity-input-wrapper {
+        width: 130px;
+      }
+    }
+  }
+
+  .cart--cart-offcanvas-footer {
+    background: #F1F1F1;
+    padding: 1em 3em;
+  }
+
+}
+
+.progressbar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  counter-reset: step;
+  margin: 2rem 0 2rem;
+
+  .progress {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 7px;
+    width: 100%;
+    z-index: 1;
+    background-color: $grey;
+    transition: 0.3s;
+  }
+
+  #progress-done {
+    background: $third;
+    width: calc(13% + 17px);
+  }
+
+  .progress-step-active {
+    background-color: $black !important;
+    color: $first;
+  }
+
+  .progress-step {
+    width: 2.1875rem;
+    height: 2.1875rem;
+    background-color: $grey;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position: absolute;
+  }
+
+  .step-1 {
+    left: calc(13% - 17px);
+    top: -17px;
+  }
+
+  .step-2 {
+    left: calc(50% - 17px);
+    top: -17px;
+  }
+
+  .step-3 {
+    right: calc(13% - 17px);
+    top: -17px;
+  }
+}
+
+.reservation-header-progress {
+  #progress-done {
+    width: 50%;
+  }
+
+  .step-1 {
+    background: $third;
+  }
+}
+
+.billing-information-header-progress {
+  #progress-done {
+    width: 85%;
+  }
+
+  .step-1,
+  .step-2 {
+    background: $third;
+    color: $first;
+  }
+}
+
+.cart-button {
+  [id*="views-form-commerce-cart-form-default"] {
+    #edit-actions {
+      display: flex;
+      justify-content: center;
+    }
+
+    #edit-submit,
+    #edit-checkout,
+    [id*="edit-remove-button"] {
+      color: $first;
+      border: 1px solid $first;
+      border-radius: 50rem !important;
+      background: $green;
+    }
+  }
+}
+
+.cart-checkout-button {
+
+  #edit-billing-information-profile-edit-button,
+  #edit-actions-next {
+    color: $first;
+    border: 1px solid $first;
+    border-radius: 50rem !important;
+    background: $green;
+  }
+
+  #edit-actions {
+    display: flex;
+    justify-content: center;
+  }
+
+  .link--previous {
+    color: $green;
+    text-decoration: none;
+  }
+
+  .fieldset-legend {
+    >a {
+      color: $black;
+      text-decoration: none;
+    }
+  }
+
+  .layout-region-checkout-footer {
+    #edit-actions {
+      >a {
+        display: none;
+      }
+    }
+  }
+
+  .layout-region-checkout-main {
+    text-align: center;
+  }
+
+  .field--name-product-id {
+    >a {
+      display: none;
+    }
+  }
+}
+
+
+// .cart-view-button {
+//   .cart--cart-offcanvas-footer {
+//     a {
+//       color: $first;
+//       border: 1px solid $first;
+//       border-radius: 50rem !important;
+//       background: $green;
+//     }
+//   }
+// }
+
+#edit-actions-next:hover,
+#edit-billing-information-profile-edit-button:hover,
+#edit-submit:hover,
+#edit-checkout:hover {
+  background-color: $second;
+  color: $first;
+  border: 1px solid $second;
+  transition-duration: 0.3s;
+}
+
+.cart-header-button,
+.reservation-header-button,
+.billingin-formation-header-button {
+  a {
+    color: $first;
+    border: 1px solid $first;
+    border-radius: 50rem !important;
+    background: $green
+  }
+}
+[id*="block-ordersummary"] table tr td  {
+  .field.field--name-product-id.field--type-entity-reference.field--label-hidden.field--item {
+    display: none;
+  }
+
+}

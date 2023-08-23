@@ -1,0 +1,52 @@
+pizzahips_global:
+  version: 1.x
+  js:
+    js/pizzahips.js: { }
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    - core/drupalSettings
+
+map:
+  js:
+    js/map.js: {}
+    js/leaflet_map_interaction.js: {}
+
+pickup:
+  version: 1.x
+  js:
+    js/pickup.js: { }
+  css:
+    theme:
+      css/pickup.css: { }
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    - core/drupalSettings
+total:
+  js:
+    js/total.js: { }
+    //unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.js: {type: external, minified: true }
+    //unpkg.com/bootstrap-table@1.21.4/dist/extensions/toolbar/bootstrap-table-toolbar.min.js: {type: external, minified: true }
+    //cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/tableExport.min.js: {type: external, minified: true }
+    //cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/libs/jsPDF/jspdf.min.js: {type: external, minified: true }
+    //cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js: {type: external, minified: true }
+    //unpkg.com/bootstrap-table@1.21.4/dist/extensions/export/bootstrap-table-export.min.js: {type: external, minified: true }
+    js/revenue.js: {}
+    //www.gstatic.com/charts/loader.js: {type: external, minified: true}
+    js/type_of_cake.js: {
+      //www.gstatic.com/charts/loader.js: {type: external, minified: true}
+    }
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    - core/drupalSettings
+CartQr:
+  js:
+    js/CartQr.js: {}
+product:
+  js:
+    js/product.js: {}

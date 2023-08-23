@@ -1,0 +1,52 @@
+.paristechno-user, .paristechno-login-form, .paristechno-password-form, .paristechno-register-form {
+  #edit-actions {
+    text-align: center;
+    button {
+      color: $first;
+      border: 1px solid $first;
+      border-radius: 2rem !important;
+      background: $second;
+    }
+  }
+
+  #edit-delete {
+    color: $first;
+    border: 1px solid $first;
+    border-radius: 2rem !important;
+  }
+
+  #edit-cancel {
+    color: $first;
+    border: 1px solid $first;
+    border-radius: 2rem !important;
+  }
+
+  .description {
+    display: none;
+  }
+
+  .user-pass p {
+    display: none;
+  }
+
+  a {
+    text-decoration: none;
+    color: $second;
+    &:hover {
+      color: $third;
+    }
+  }
+
+  h1 {
+    font-size: 1.75rem !important;
+    text-align: center;
+    font-weight: 500;
+  }
+}
+
+.paristechno-user {
+  #block-pagetitle, [id^="block-"][id$="-content"] {
+    justify-content: center;
+    display: flex;
+  }
+}

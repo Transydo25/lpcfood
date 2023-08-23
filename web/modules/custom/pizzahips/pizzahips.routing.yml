@@ -1,0 +1,23 @@
+pizzahips.save_history_search_map:
+  path: '/save-history-search-map'
+  defaults:
+    _controller: '\Drupal\pizzahips\Controller\MapController::saveHistorySearchMap'
+    _disable_route_normalizer: 'TRUE'
+  requirements:
+    _access: 'TRUE'
+
+pizzahips.search_map:
+  path: '/search-map'
+  defaults:
+    _controller: '\Drupal\pizzahips\Controller\MapController::searchMap'
+    _disable_route_normalizer: 'TRUE'
+  requirements:
+    _access: 'TRUE'
+
+pizzahips.cart_qr:
+  path: '/cart-qr'
+  defaults:
+    _title: 'CarQr form'
+    _form: '\Drupal\pizzahips\Form\CartQrForm'
+  requirements:
+    _access: 'TRUE'

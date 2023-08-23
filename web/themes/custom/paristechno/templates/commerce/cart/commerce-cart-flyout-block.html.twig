@@ -1,0 +1,14 @@
+<div class="cart--cart-block">
+  <div class="cart-block--summary d-none d-sm-block">
+    <a class="cart-block--link__expand" href="<%= url %>">
+      <span class="cart-block--summary__icon"></span>
+      <span class="cart-block--summary__count"><%= count_text.replace(' item','').replace('s','') %></span>
+    </a>
+  </div>
+  <div class="cart-block--summary d-block d-sm-none">
+    <a href="<%= url %>">
+      <span class="cart-block--summary__icon"></span>
+      <span class="cart-block--summary__count"><%= count_text.replace(' item','').replace('s','') %></span>
+    </a>
+  </div>
+</div>

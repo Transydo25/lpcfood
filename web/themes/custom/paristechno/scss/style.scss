@@ -1,0 +1,20 @@
+// Sub theme styling.
+@import 'variables_drupal';
+
+// Bootstrap overriden variables.
+// @see https://getbootstrap.com/docs/5.2/customize/sass/#variable-defaults.
+@import 'variables_bootstrap';
+@import "common/color";
+@import "common/menu";
+@import "common/scrollbar";
+@import "common/variables";
+@import "layout/product";
+@import "layout/dashboard";
+@import "layout/footer";
+@import "layout/layout";
+@import "layout/project";
+@import "layout/responsive";
+@import "layout/store-map";
+@import "layout/form_login";
+@import "layout/header";
+@import "layout/cart";

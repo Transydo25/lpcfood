@@ -1,0 +1,71 @@
+{%
+  set nav_classes = 'navbar navbar-expand-lg' ~
+  (b5_navbar_schema != 'none' ? " navbar-#{b5_navbar_schema}" : ' ') ~
+  (b5_navbar_schema != 'none' ? (b5_navbar_schema == 'dark' ? ' text-light' : ' text-dark' ) : ' ') ~
+  (b5_navbar_bg_schema != 'none' ? " bg-#{b5_navbar_bg_schema}" : ' ')
+%}
+
+{%
+  set footer_classes = ' ' ~
+  (b5_footer_schema != 'none' ? " footer-#{b5_footer_schema}" : ' ') ~
+  (b5_footer_schema != 'none' ? (b5_footer_schema == 'dark' ? ' text-light' : ' text-dark' ) : ' ') ~
+  (b5_footer_bg_schema != 'none' ? " bg-#{b5_footer_bg_schema}" : ' ')
+%}
+
+<header class="header-paristechno">
+  {{ page.header }}
+
+  {% if page.nav_branding or page.nav_main or page.nav_additional %}
+    <nav class="{{ nav_classes }}">
+      <div class="{{ b5_top_container }} d-flex">
+        {{ page.nav_branding }}
+
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-md-end flex-wrap" id="navbarSupportedContent">
+          {{ page.nav_main }}
+          {{ page.nav_additional }}
+        </div>
+      </div>
+    </nav>
+  {% endif %}
+
+</header>
+
+<main role="main">
+  <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+  <div class="{{ b5_top_container }}">
+    {% if page.breadcrumb %}
+      {{ page.breadcrumb }}
+    {% endif %}
+
+    <div class="container my-2">
+      <div class="row">
+        <div class="col-md-7 h-100 mb-2 mb-md-0 col-sm-12 {{ content_classes }} cart-page-products-list">
+          <div class="shadow px-2 py-5 h-100 bg-body rounded">
+            {{ page.content }}
+          </div>
+        </div>
+        <div class="col-md-5 col-sm-12 {{ sidebar_second_classes }} cart-page-products-summary">
+          <div class="shadow ml-lg-3 h-100 p-5 bg-body rounded">
+            {{ page.sidebar_second }}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+{% if page.footer %}
+<footer class="mt-auto footer {{ footer_classes }} footer-paristechno mt-auto">
+  <div class="{{ b5_top_container }}">
+    {{ page.footer }}
+  </div>
+</footer>
+{% endif %}
+<a id="back-to-top" href="#" class="position-fixed btn btn-light btn-lg back-to-top shadow" style="right: 28px; bottom: 100px" role="button"><i class="bi bi-chevron-up"></i></a>

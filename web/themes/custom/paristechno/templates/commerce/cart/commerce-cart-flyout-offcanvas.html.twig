@@ -1,0 +1,49 @@
+{{ attach_library('paristechno/custom-form-elements') }}
+<div class="row cart-view-button">
+  <div class="col-sm-12">
+    <div class="cart--cart-offcanvas well well-lg well-primary">
+      <h2 class="title">{{ 'Cart'|t }}</h2>
+      <h5 class="subtitle d-inline">{{ 'Order in 3 steps!'|t }}</h5>
+      <div class="cart--cart-offcanvas__close d-inline">
+        <button type="button" class="btn button btn close-btn  btn-close float-end"><span class="visually-hidden">{{ 'Close cart'|t }}</span></button>
+      </div>
+      <div class="pb-1">
+        <div class="">
+          <div class="progressbar">
+            <div class="progress" id="progress"></div>
+            <div class="progress" id="progress-done"></div>
+            <div class="progress-step progress-step-active step-1" data-title="{{ 'Order confirmation'|t }}"><a class="link-light" href="/cart"><i class="bi bi-basket-fill"></i></a></div>
+            <div class="progress-step step-2" data-title="{{ 'Choose the store'|t }}"><a class="link-dark" href="/checkout"><i class="bi bi-hospital"></i></a></div>
+            <div class="progress-step step-3" data-title="{{ 'Order processing'|t }}"><i class="bi bi-arrow-repeat"></i></div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <% if (count > 0) { %>
+      <div class="cart-block--offcanvas-contents">
+        <div class="cart-block--offcanvas-contents__inner">
+          <div class="cart-block--offcanvas-contents__items"></div>
+          <hr/>
+          <div class="js-form-item form-item js-form-type-textarea form-item-field-indication js-form-item-field-indication my-3">
+            <label for="edit-field-indication" class="col-form-label fw-bold">{{ 'Your indication'|t }}</label>
+            <textarea placeholder="{{ 'Add your notes'|t }}…" data-drupal-selector="edit-field-indication" id="edit-field-indication" name="field_indication" class="form-textarea form-control bg-light bg-gradient" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+      <% } else { %>
+      <div>{{ 'Your cart is empty.'|t }}</div>
+      <% } %>
+    </div>
+
+    <div class="cart--cart-offcanvas-footer d-flex justify-content-between align-items-center position-sticky bottom-0">
+      <div class="cart-block--offcanvas-contents__links">
+        <a href="/cart" class="btn btn-primary"> {{ 'Check cart'|t }}</a>
+{#        <img src="/themes/custom/paristechno/img/icon-cart.svg" alt="{{ 'Cart'|t }}" style="width: 30px"/>#}
+      </div>
+      <div class="cart--cart-offcanvas__close visible-xs visible-sm text-align-center">
+        <a href="/cart" class="btn btn-primary">{{ 'Go to checkout'|t }}</a>
+      </div>
+    </div>
+  </div>
+</div>
+

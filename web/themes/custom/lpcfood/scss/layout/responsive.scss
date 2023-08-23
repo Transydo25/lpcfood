@@ -1,0 +1,55 @@
+
+@media only screen and (max-width: 768px) {
+//menu trang sản phẩm
+.menu--menu-product {
+    li {
+        margin-bottom: 0.5rem;
+    }
+}
+}
+
+@media only screen and (max-width: 992px) {
+  [id*="block-views-block-san-pham-block"],[id*="block-views-block-san-pham-block-product-home"] {
+    .slick {
+      .slick-slide {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+    }
+    .slick__arrow {
+      top: 33% !important;
+      .slick-prev {
+        left: 0;
+      }
+      .slick-next {
+        right: 0;
+      }
+    }
+  }
+  .news-title-main {
+    padding: 0 0 !important;
+
+    .title-news {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .lpcfood-news-feed .slick__slide {
+    margin-left: 1.2rem !important;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .slick-news {
+    height: 344px !important;
+    overflow: hidden;
+  }
+}
+
+@media only screen and (max-width: 1400px) {
+  .slick-news {
+    height: 414px;
+    overflow: hidden;
+  }
+}

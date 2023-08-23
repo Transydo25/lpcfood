@@ -1,0 +1,47 @@
+{{ attach_library('paristechno/custom-form-elements') }}
+<div class="container-fluid" data-bootstrap-contains="containers" data-n1ed-block-category="grid">
+    <div class="container">
+        <div class="row pb-3 cart-header-button">
+            <div class="col-12 col-lg-12 pt-4 w-auto">
+                <div>
+                    <a class="btn btn-primary fs-14" href="/san-pham" data-cke-saved-href="/san-pham" role="button">{{'Return'|t}}</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-12 pb-2">
+                <h2 class="text-align-center font-main-medium-color-black-home">
+                    {{ 'Cart'|t }}
+                </h2>
+                <h5 class="subtitle text-align-center fs-14">
+                    {{ 'Place your order in 3 steps!'|t }}
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" data-bootstrap-contains="containers" data-n1ed-block-category="grid">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-8 offset-lg-2 py-3">
+                <div class="progressbar">
+                    <div class="progress" id="progress">
+                        &nbsp;
+                    </div>
+                    <div class="progress" id="progress-done">
+                        &nbsp;
+                    </div>
+                    <div class="progress-step progress-step-active step-1 ms-4" data-title="Validate your order">
+                        <a class="link-light" href="/cart" data-cke-saved-href="/cart"><em><i class="bi bi-basket-fill"><span class="d-none">1</span></i></em></a>
+                    </div>
+                    <div class="progress-step step-2" data-title="Choose the booth and the niche that suits you">
+                        <a class="link-dark" href="/checkout" data-cke-saved-href="/checkout"><em><i class="bi bi-hospital"><span class="d-none">2</span></i></em></a>
+                    </div>
+                    <div class="progress-step step-3 me-4" data-title="Our team takes care of the order">
+                        <em><i class="bi bi-arrow-repeat"><span class="d-none">3</span></i></em>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

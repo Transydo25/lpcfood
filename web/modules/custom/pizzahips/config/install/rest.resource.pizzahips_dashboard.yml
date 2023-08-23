@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - pizzahips
+    - serialization
+id: pizzahips_dashboard
+plugin_id: pizzahips_dashboard
+granularity: resource
+configuration:
+  methods:
+    - GET
+  formats:
+    - json
+  authentication:
+    - cookie

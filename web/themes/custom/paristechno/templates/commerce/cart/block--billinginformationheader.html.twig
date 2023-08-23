@@ -1,0 +1,32 @@
+{{ attach_library('paristechno/custom-form-elements') }}
+<div class="container-fluid" data-bootstrap-contains="containers" data-n1ed-block-category="grid">
+  <div class="container">
+    <div class="row pb-3 billingin-formation-header-button">
+      <div class="col-12 col-lg-12 pt-5">
+      <div>
+     <a class="btn btn-primary fs-14" href="/cart" data-cke-saved-href="/san-pham" role="button">{{'Return'|t}}</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-12 pb-3">
+        <h2 class="text-align-center font-messiri">{{ 'Your contact details'|t }}</h2>
+        <h5 class="subtitle text-align-center">{{ '3 Easy Steps to Place an Order'|t }}!</h5>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid billing-information-header-progress" data-bootstrap-contains="containers" data-n1ed-block-category="grid">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-8 offset-lg-2 py-3">
+        <div class="progressbar">
+          <div class="progress" id="progress"></div>
+          <div class="progress" id="progress-done"></div>
+          <div class="progress-step step-1 ms-4" data-title="{{ 'Order confirmation'|t }}"><a class="link-light" href="/cart"><i class="bi bi-basket-fill"></i></a></div>
+          <div class="progress-step step-2" data-title="{{ 'Choose the store'|t }}"><a class="link-light" href="/checkout"><i class="bi bi-hospital"></i></a></div>
+          <div class="progress-step progress-step-active step-3 me-4" data-title="{{ 'Order processing'|t }}"><i class="bi bi-arrow-repeat"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

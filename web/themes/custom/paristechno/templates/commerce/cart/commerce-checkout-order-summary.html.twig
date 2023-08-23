@@ -1,0 +1,56 @@
+{#
+/**
+ * @file
+ * Default theme implementation for the checkout order summary.
+ *
+ * The rendered order totals come from commerce-order-total-summary.html.twig.
+ * See commerce-order-receipt.html.twig for examples of manual total theming.
+ *
+ * Available variables:
+ * - order_entity: The order entity.
+ * - checkout_step: The current checkout step.
+ * - totals: An array of order total values with the following keys:
+ *   - subtotal: The order subtotal price.
+ *   - adjustments: An array of adjustment totals:
+ *     - type: The adjustment type.
+ *     - label: The adjustment label.
+ *     - total: The adjustment total price.
+ *     - weight: The adjustment weight, taken from the adjustment type.
+ *   - total: The order total price.
+ * - rendered_totals: The rendered order totals.
+ */
+#}
+<div{{ attributes.addClass('checkout-order-summary') }}>
+  {% block order_items %}
+    <div class="pb-3 products-list-summary border-bottom">
+      <table class="w-100">
+        <tbody>
+        {% for order_item in order_entity.getItems %}
+          <tr>
+            {% if order_item.hasPurchasedEntity %}
+              <td>{{ order_item.getPurchasedEntity|commerce_entity_render('summary') }}</td>
+            {% else %}
+              <td>{{- order_item.label -}}</td>
+            {% endif %}
+            <td>x {{ order_item.getQuantity|number_format }}</td>
+
+            <td class="text-end">{{- order_item.getTotalPrice|commerce_price_format -}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endblock %}
+  {% block totals %}
+    <div class="pb-3 pt-2 products-total-summary">
+      {{ rendered_totals }}
+    </div>
+    <div class="form-floating order-indication js-form-item form-item js-form-type-textarea form-item- js-form-item- mb-3 form-disabled">
+      <textarea id="cart-field-indication" disabled="disabled" rows="4" cols="60" class="form-textarea form-control"></textarea>
+      <label class="option form-check-label">{{ 'Indication'|t }}</label>
+    </div>
+    <div class="text-align-center">
+      <a href="/checkout" class="btn btn-food">{{ 'Go to checkout'|t }}</a>
+    </div>
+  {% endblock %}
+</div>

@@ -1,0 +1,30 @@
+<div class="cart-block--offcanvas-cart-table">
+  <% _.each(cart.order_items, function(orderItem, key) { %>
+  <div class="d-flex justify-content-between py-3 cart-item-block">
+    <img class="cart-block--offcanvas-cart-table__image" src="<%= orderItem.purchased_entity.field_product_variation_image %>"/>
+    <div class="d-flex cart-block--offcanvas-cart-table__title">
+      <div>
+        <span class="order-title"><%- orderItem.title %></span> <br>
+      </div>
+      <div class="d-flex justify-content-between align-items-end item-price">
+        <div class="quantity">
+          <span class="quantity-text">{{ 'Quantity'|t }}</span>
+          <div class="d-flex justify-content-between quantity-input-wrapper cart-block--offcanvas-cart-table__quantity">
+            <input class="form-control quantity-input" type="number" min="0" data-key="<% print(key) %>" data-unitprice="<% print(parseFloat(orderItem.unit_price.formatted.replace( /[^\d\.]*/g, ''))) %>" value="<% print(parseInt(orderItem.quantity)) %>" />
+            <div class="cart-block--offcanvas-cart-table__remove">
+              <button type="button" value="<% print(JSON.stringify([cart.order_id, orderItem.order_item_id]))  %>"
+                      class="btn px-3 quantity-delete-button">
+                <i class="bi bi-trash"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="cart-block--offcanvas-cart-table__price">
+          <%= orderItem.total_price.formatted %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% }) %>
+  <button type="submit" class="js-hide cart-block--offcanvas-contents__update btn btn-sm btn-dark">
+    <i class="bi bi-basket"></i> {{ 'Update quantities'|t }}</button>
+</div>

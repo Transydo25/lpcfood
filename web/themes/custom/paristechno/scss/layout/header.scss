@@ -1,0 +1,49 @@
+.header-paristechno {
+  background-color: $second;
+
+  li.nav-item a {
+    text-decoration: none !important;
+    color: $first;
+    background-color: $second !important;
+    &:hover {
+      color: $third !important;
+    }
+  }
+}
+.cart--cart-block {
+  .cart-block--summary {
+    a {
+      position: relative;
+      span.cart-block--summary__count {
+        background: $third;
+        color: white;
+        padding: 3px;
+        border-radius: 100%;
+        min-width: 15px;
+        overflow: hidden;
+        display: inline-block;
+        height: 15px;
+        font-size: 0.6em;
+        position: absolute;
+        margin-left: -5px;
+        line-height: 10px;
+        top: -5px;
+        right: -10px;
+        text-align: center;
+      }
+    }
+  }
+
+  .cart-block--summary__icon {
+    background: white;
+    border-radius: 14px;
+    padding: 6px;
+  }
+}
+.menu--account {
+  ul[data-block="user_card"]{
+    .sr-only {
+      display: none;
+    }
+  }
+}

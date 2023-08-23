@@ -1,0 +1,24 @@
+name: 'Paris techno ecommerce theme'
+type: theme
+description: 'Paris techno ecommerce theme subtheme based on Bootstrap 5 admin theme.'
+core_version_requirement: '^8.9 || ^9 || ^10'
+'base theme': bootstrap5_admin
+libraries:
+  - paristechno/global-styling
+regions:
+  header: Header
+  nav_branding: 'Navigation branding region'
+  nav_main: 'Main navigation region'
+  nav_additional: 'Additional navigation region (eg search form, social icons, etc)'
+  breadcrumb: Breadcrumbs
+  content: 'Main content'
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  footer: Footer
+libraries-extend:
+  core/drupal.ajax:
+    - bootstrap5_admin/drupal.ajax
+  core/drupal.progress:
+    - bootstrap5_admin/drupal.progress
+stylesheets-remove:
+  - '@bootstrap5_admin/css/style.css'

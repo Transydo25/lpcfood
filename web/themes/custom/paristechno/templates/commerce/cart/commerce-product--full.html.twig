@@ -1,0 +1,61 @@
+{#
+/**
+ * @file
+ *
+ * Default product template.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the wrapper.
+ * - product: The rendered product fields.
+ *   Use 'product' to print them all, or print a subset such as
+ *   'product.title'. Use the following code to exclude the
+ *   printing of a given field:
+ *   @code
+ *   {{ product|without('title') }}
+ *   @endcode
+ * - product_entity: The product entity.
+ * - product_url: The product URL.
+ *
+ * @ingroup themeable
+ */
+#}
+{{ attach_library('lpcfood/commerce.product-images') }}
+{%
+  set classes = [
+  'commerce-product',
+  'commerce-product--' ~ product_entity.bundle|clean_class,
+  'commerce-product--full',
+  'container',
+]
+%}
+<article{{ attributes.addClass(classes) }}>
+  <div class="row my-md-4">
+    <div class="col-md-6 text-center position-relative">
+      {% if product.field_sale.0 is not null and product.field_sale.0 is not empty %}
+        <div class="product-sale position-absolute top-0 end-0">
+            <img src="/themes/custom/lpcfood/image/sale.jpg" alt="sale-off">
+        </div>
+      {% endif %}
+      {{- product.field_product_variation_image -}}
+      {{- product.variation_field_product_variation_image -}}
+    </div>
+    <div class="col-md-6 commerce-product--full-block-right">
+      <div class="commerce-product__contents p-3 bg-body rounded">
+        <h5 class="title text-uppercase mb-4 fw-bold">{{- product.title -}}</h5>
+        {% if product.field_sale.0 is not null and product.field_sale.0 is not empty %}
+          <div class="sale-prices d-flex align-items-center">
+            <div class="pe-3">Giá: </div>
+            <del class="cost fw-bold">{{ product.field_cost }}</del>
+            <h5 class="sale-price fw-bold ms-2">{{ product.variation_price}}</h5>
+            <p>{{product.field_sale}}</p>
+          </div>
+        {% else %}
+          <h6 class="pricetag font-weight-400 mb-md-2">{{- product.variation_price -}}</h6>
+        {% endif %}
+        <h6 class="body font-weight-400">{{- product.body -}}</h6>
+        <h6 class="category-tag font-weight-400 mb-md-2">{{- product.field_product_tags -}}</h6>
+        {{- product|without('field_cost','field_product_image','field_product_tags','field_images',"body",'variation_attributes','variation_price','variation_field_product_variation_image','variation_field_tag','field_quality') -}}
+      </div>
+    </div>
+  </div>
+</article>

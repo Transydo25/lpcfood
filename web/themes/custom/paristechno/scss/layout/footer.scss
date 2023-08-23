@@ -1,0 +1,26 @@
+.footer-block {
+  color: $first !important;
+}
+
+.footer-block a img {
+  width: 30px;
+  height: 30px;
+}
+
+.footer-block a {
+  text-decoration: none !important;
+  color: $first !important;
+  background-color: $second !important;
+  &:hover {
+    color: $third !important;
+  }
+}
+
+.footer-paristechno {
+  background-color: $second !important;
+}
+.footer-icon-mb {
+  a {
+    padding: 5px;
+  }
+}

@@ -1,0 +1,25 @@
+name: lpcfood
+type: theme
+description: 'lpcfood subtheme based on paristechno theme.'
+core_version_requirement: '^8.9 || ^9 || ^10'
+'base theme': paristechno
+libraries:
+  - lpcfood/global-styling
+  - lpcfood/carousel
+regions:
+  header: Header
+  nav_branding: 'Navigation branding region'
+  nav_main: 'Main navigation region'
+  nav_additional: 'Additional navigation region (eg search form, social icons, etc)'
+  breadcrumb: Breadcrumbs
+  content: 'Main content'
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  footer: Footer
+libraries-extend:
+  core/drupal.ajax:
+    - bootstrap5_admin/drupal.ajax
+  core/drupal.progress:
+    - bootstrap5_admin/drupal.progress
+stylesheets-remove:
+  - '@bootstrap5_admin/css/style.css'

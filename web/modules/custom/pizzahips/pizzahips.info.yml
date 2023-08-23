@@ -1,0 +1,6 @@
+name: Pizzahips conner custom module
+description: Use for Pizzahips conner theme
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: Custom
+type: module

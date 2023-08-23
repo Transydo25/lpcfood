@@ -1,0 +1,247 @@
+.vertical-tabs__panes > details {
+  border: none;
+}
+/**
+ * Styles for link buttons and action links.
+ */
+.action-links {
+  margin: 1em 0;
+  padding: 0;
+  list-style: none;
+}
+[dir="rtl"] .action-links {
+  /* This is required to win over specificity of [dir="rtl"] ul */
+  margin-right: 0;
+}
+.action-links li {
+  display: inline-block;
+  margin: 0 0.3em;
+}
+.action-links li:first-child {
+  margin-left: 0; /* LTR */
+}
+[dir="rtl"] .action-links li:first-child {
+  margin-right: 0;
+  margin-left: 0.3em;
+}
+.button-action:before {
+  margin-left: -0.1em; /* LTR */
+  padding-right: 0.2em; /* LTR */
+  content: "+";
+  font-weight: 900;
+}
+[dir="rtl"] .button-action:before {
+  margin-right: -0.1em;
+  margin-left: 0;
+  padding-right: 0;
+  padding-left: 0.2em;
+}
+input.machine-name-source {
+  border-radius: 0.3em;
+}
+
+/**
+ * General styles for dropbuttons.
+ */
+.js .dropbutton-widget {
+  border: 1px solid #ccc;
+  background-color: white;
+  display: inline-block;
+  border-radius: 0.3em;
+}
+.js .dropbutton-widget:hover {
+  border-color: #b8b8b8;
+}
+.dropbutton .dropbutton-action > * {
+  padding: 0.1em 0.5em;
+  white-space: nowrap;
+}
+.dropbutton .secondary-action {
+  border-top: 1px solid #e8e8e8;
+}
+.dropbutton-multiple .dropbutton {
+  border-right: 1px solid #e8e8e8; /* LTR */
+}
+[dir="rtl"] .dropbutton-multiple .dropbutton {
+  border-right: 0 none;
+  border-left: 1px solid #e8e8e8;
+}
+.dropbutton-multiple .dropbutton .dropbutton-action > * {
+  margin-right: 0.25em; /* LTR */
+}
+[dir="rtl"] .dropbutton-multiple .dropbutton .dropbutton-action > * {
+  margin-right: 0;
+  margin-left: 0.25em;
+}
+
+/**
+ * Table drag behavior.
+ */
+a.tabledrag-handle .handle {
+  display: table-cell;
+  padding-right: 1rem !important;
+}
+.draggable a.tabledrag-handle,
+.field-multiple-drag a.tabledrag-handle {
+  margin-top: -3px;
+}
+.draggable a.tabledrag-handle .handle,
+.field-multiple-drag a.tabledrag-handle .handle {
+  height: 23px;
+  -webkit-mask-position-x: 8px;
+  -webkit-mask-position-y: 8px;
+}
+.draggable td fieldset {
+  box-shadow: none !important;
+  border: none !important;
+}
+.block-admin-display-form tr {
+  vertical-align: middle;
+}
+
+/**
+ * Dialog.
+ */
+.ui-dialog .ui-dialog-titlebar-close:before {
+  content: 'X';
+}
+.ui-dialog .ui-dialog-titlebar-close {
+  height: 25px;
+}
+
+/**
+ * Views list.
+ */
+.views-listing-table td h3 {
+  font-size: 1rem;
+}
+.views-display-top .tabs.secondary {
+  list-style: none;
+}
+.views-displays .tabs .action-list {
+  position: absolute;
+  z-index: 50;
+  top: 2.375rem;
+  left: -2px;
+  margin: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.views-ui-display-tab-bucket .dropbutton-widget input.form-submit,
+.views-displays .tabs .action-list input.form-submit {
+  color: #0c0d0e;
+  width: 100%;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  text-align: left;
+  border: medium none;
+  border-radius: 0;
+}
+.views-ui-display-tab-bucket .dropbutton-widget .dropbutton-action:hover {
+  color: #222330;
+  background: #f3f4f9;
+}
+.views-ui-dialog .views-filterable-options-controls .form-item,
+.views-ui-dialog .views-override .form-item-override-dropdown {
+  display: inline-block;
+}
+.views-view-table th.select-all {
+  width: 2em;
+}
+/**
+ * Progress run batch or install.
+ */
+.progress-wrapper .progress {
+  display: initial !important;
+  height: auto !important;
+}
+
+/**
+ * Form field ui.
+ */
+.field-ui-field-storage-add-form .input-group label,
+.field-ui-field-storage-add-form .input-group .field-prefix,
+.field-ui-field-storage-add-form .input-group .description {
+  margin-top: .5rem !important;
+  margin-right: .2rem !important;
+}
+.form-item-date-format-pattern.input-group,
+.form-item-gd-image-jpeg-quality.input-group,
+.form-type--machine-name.input-group,
+.form-type--machine-name.input-group label {
+  display: block;
+}
+.form-type--machine-name.input-group input.machine-name-target {
+  display: inline-block;
+  width: auto;
+}
+.shortcut-form .form-type--entity-autocomplete,
+.form-item-settings-label.input-group {
+  display: block;
+}
+.form-item-date-format-pattern input.form-control,
+.shortcut-form .form-type--entity-autocomplete input,
+.form-item-gd-image-jpeg-quality input.form-control,
+.form-item-site-frontpage input.form-control,
+.form-item-settings-label input.form-control {
+  width: auto;
+  display: inline-block;
+}
+.form-item-date-format-pattern label,
+.form-item-gd-image-jpeg-quality label,
+.shortcut-form .form-type--entity-autocomplete label,
+.form-item-site-frontpage label,
+.form-item-settings-label label {
+  font-weight: bold;
+  display: block;
+}
+.form-item-gd-image-jpeg-quality .input-group-text {
+  display: inline;
+}
+.image-style-new {
+  display: flex;
+}
+.system-file-system-settings label {
+  font-weight: bold;
+  display: inline;
+  width: auto;
+  line-height: 10px;
+}
+.view-preview-form .preview-submit-wrapper {
+  margin-top: 3.3em;
+}
+
+/**
+ * Fixed placeholder generate by drupal.
+ */
+em.placeholder {
+  background-color: initial !important;
+}
+
+/**
+ * Fixed popup ovelay z-index.
+ */
+.ui-widget-overlay {
+  z-index: 1;
+}
+
+/**
+ * Menu edit form
+ */
+.menu-edit-form .dropbutton-widget {
+  border: none;
+}
+button.link {
+  color: #0e6def;
+  font-weight: 400;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  text-decoration: underline;
+}
+button.link:hover {
+  color: #0a58ca;
+}
+details .details-wrapper fieldset.border {
+  border: none !important;
+  box-shadow: none !important;
+}

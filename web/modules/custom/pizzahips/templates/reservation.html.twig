@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="d-flex justify-content-center align-items-center flex-column mt-3">
+    <div class="col-md-6 col-sm-12 cart-page-products-list">
+      <h3 class="font-main-16-color-black fs-16">{{ 'Select for a store near you'|t }} <i class="text-secondary fs-14 fw-lighter required">({{ 'required'|t }})</i></h3>
+      <div class="row g-3 mt-2 mb-3">
+        <div class="col-sm-9">
+          <input id="search" list="datalistOptions" type="search" class="form-control" autocomplete="off" placeholder="{{ 'search for a store near you'|t }}" aria-label="search">
+          <datalist id="datalistOptions">
+            {% for item in stores %}
+              <option value="{{ item.title }}" data-value="{{ item.nid }}" data-address="{{ item.field_address_address_line1 }} - {{ item.field_address_postal_code }} {{ item.field_address_locality }}"> {{ item.field_address_address_line1 }} - {{ item.field_address_organization }} - {{ item.field_address_locality }}</option>
+            {% endfor %}
+          </datalist>
+        </div>
+        <div class="col-sm">
+          <button type="button" class="btn btn-primary">{{ 'Search'|t }}</button>
+        </div>
+      </div>
+      <div class="row g-3 mb-3">
+      </div>
+      {# <h3 class="font-main-16-color-black fs-16">{{ 'Choose a pickup time'|t }} <i class="text-secondary fs-14 fw-lighter required">({{ 'required'|t }})</i></h3>
+      <div class="container p-0 mt-3">
+        <div class="row g-2">
+          {% for item in datePickup %}
+            <div class="col">
+              <button type="button" class="date-pickup btn btn-outline-dark text-center" data-date="{{ item.date }}">{{ item.text|raw }}</button>
+            </div>
+          {% endfor %}
+        </div>
+        <hr/>
+        <div class="row g-2 mt-2">
+          {% for item in timePickup %}
+            <div class="col-6" >
+              <button type="button" class="w-100 time-pickup btn btn-outline-dark text-center" data-time="{{ item.time }}">{{ item.text| raw }}</button>
+            </div>
+          {% endfor %}
+        </div>
+      </div> #}
+    </div>
+    <div class="col-md-6 col-sm-12  cart-page-products-summary">
+      <div class="shadow ml-lg-3 p-5 bg-body rounded">
+        <h2>{{ 'Order'|t }} N° {{ order_id }}</h2>
+        <hr>
+        <div class="list-group w-auto">
+          <div class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+            <img src="/themes/custom/paristechno/img/corners.svg" alt="conner" width="32" height="32" class="flex-shrink-0">
+            <div class="d-flex gap-2 w-100 justify-content-between">
+              <div>
+                <h3 class="mb-0">{{ 'Store'|t }}</h3>
+                <p class="mb-0 opacity-75" id="showAddressSelect">{{ address|raw }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+            <i class="bi bi-clock fs-2"></i>
+            <div class="d-flex gap-2 w-100 justify-content-between">
+              <div>
+                <h3 class="mb-0">{{ 'Time'|t }}</h3>
+                <p class="mb-0 opacity-75">
+                <h5 class="pickup-date-text">{{ date }}</h5>
+                <div class="pickup-time-text w-100">{{ time }}</div>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-align-center mt-3">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#validateModal" id="validateOrder">{{ 'Validate Order'|t }}</button>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="validateModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="text-align-right">
+                <button type="button" class="btn-close mt-1 me-1" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body text-center">
+                <img src="/themes/custom/lpcfood/img/logo-hips.svg" class="mb-4"/>
+                <h4>{{ 'Are you sure you would like to confirm order?'|t }}</h4>
+                <p class="my-3">{{ 'Unfortunately, we cannot modify or cancel your order once it has been validated.'|t }}</p>
+              </div>
+              <div class="modal-footer py-2">
+                <div class="col text-align-center">
+                  <button type="submit" id="edit-actions-next" class="w-50 button button--primary js-form-submit form-submit btn btn-primary" data-drupal-selector="edit-actions-next">{{ 'Agree'|t }}</button>
+                </div>
+                <div class="col text-align-center">
+                  <button type="button" class="w-50 button button--primary js-form-submit form-submit btn btn-primary" data-bs-dismiss="modal">{{ 'Cancel'|t }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-contact-fb p-3">
+        <i>*{{ 'If you can not find the right time for you, you can visit us in-store, choose a different date or contact us via'|t}} <a target="blank" href="https://www.facebook.com/Pizzahips.italy">{{ 'Facebook'|t }}.</a></i>
+      </div>
+    </div>
+  </div>
+</div>

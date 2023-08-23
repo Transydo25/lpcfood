@@ -1,0 +1,52 @@
+//tiều đề menu sản phẩm
+.title-menu-product {
+  color: $second;
+  border-bottom: 2px solid $second;
+  display: inline-block;
+}
+
+//menu trang sản phẩm
+.menu--menu-product {
+  ul {
+    flex-direction: row;
+    li {
+      margin-right: 5px;
+      a {
+        border: 1px solid $third;
+        padding: 0 15px;
+        color: $third !important;
+        border-radius: 3px;
+        &.is-active,&:hover {
+          color: white !important;
+          background-color: $third;
+        }
+      }
+    }
+  }
+}
+
+// css ngu dùng tạm thười
+.slick--view--san-pham--block-3 {
+  a[href="/san-pham/na-hoa-binh"] {
+    img, > div {
+      width: 25% !important;
+    }
+  }
+}
+
+.field--name-field-sale,.field--name-field-product-tags  {
+  display: none !important;
+}
+.sale-prices {
+  .field--label {
+    display: none;
+  }
+  .sale-price {
+    .field--item {
+      font-size: 2rem;
+    }
+  }
+  .cost {
+    font-size: 1.6rem;
+  }
+}

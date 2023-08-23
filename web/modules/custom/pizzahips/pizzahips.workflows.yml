@@ -1,0 +1,42 @@
+order_prepared_fulfillment_validation:
+  id: order_fulfillment_validation
+  group: commerce_order
+  label: 'Prepared, Fulfillment, with validation'
+  states:
+    draft:
+      label: Draft
+    validation:
+      label: Validation
+    prepared:
+      label: Prepared
+    fulfillment:
+      label: Fulfillment
+    completed:
+      label: Completed
+    canceled:
+      label: Canceled
+  transitions:
+    place:
+      label: 'Place order'
+      from: [draft]
+      to: validation
+    process:
+      label: 'Prepared order'
+      from: [validation]
+      to: prepared
+    finish:
+      label: 'Finish order'
+      from: [prepared]
+      to: fulfillment
+    fulfill:
+      label: 'Fulfill order'
+      from: [fulfillment]
+      to: completed
+    return:
+      label: 'Return order'
+      from: [fulfillment]
+      to: canceled
+    cancel:
+      label: 'Cancel order'
+      from: [draft, validation, prepared]
+      to: canceled

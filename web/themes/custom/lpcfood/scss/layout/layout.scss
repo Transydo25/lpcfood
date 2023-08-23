@@ -1,0 +1,121 @@
+.text-food-second {
+  color: $second;
+}
+// logo
+.site-logo {
+  img {
+    width: 200px;
+  }
+}
+
+//chuyển trang
+.pager {
+  display: flex;
+  justify-content: center;
+
+  a {
+    color: $second;
+  }
+
+  li.active {
+    .page-link {
+      background-color: $second;
+      color: white;
+    }
+  }
+}
+
+// form search header
+#search-block-form {
+  position: relative;
+  width: 16rem;
+
+  .form-type-search {
+    width: 100%;
+  }
+
+  .form-search {
+    padding: 3px;
+    border-radius: 4px;
+  }
+
+  .form-actions {
+    position: absolute;
+    right: 0;
+
+    &::before {
+      content: '';
+      width: 30px;
+      height: 30px;
+      top: 5px;
+      background-image: url("../image/search.svg");
+      position: absolute;
+      background-repeat: no-repeat;
+    }
+
+    .form-submit {
+      height: 2rem;
+      width: 2rem;
+      opacity: 0;
+    }
+  }
+}
+
+//button food
+.btn-food {
+  background: $second !important;
+
+  &:hover {
+    background: $third !important;
+  }
+}
+
+//form liên hệ
+.contact-message-form {
+  #edit-actions {
+    display: flex;
+    justify-content: center;
+  }
+
+  button {
+    border: none;
+    background: $second !important;
+    margin: 10px 0;
+
+    &:hover {
+      background: $third !important;
+    }
+  }
+}
+
+.btn-primary:hover,
+.btn-food:hover {
+  background-color: $third !important;
+  color: $first !important;
+  border: 1px solid $third;
+  transition-duration: 0.3s;
+}
+.btn-primary,
+.btn-food {
+  color: white;
+  border: 1px solid $second;
+  border-radius: 50rem !important;
+  background: $second;
+}
+.is-active {
+  color: $third !important;
+}
+.active2 {
+  color: $fifth !important;
+  background-color: $third;
+}
+.active1 {
+  color: $third !important;
+}
+.order-indication {
+  label {
+    &::after {
+      background-color: unset !important;
+    }
+  }
+}
